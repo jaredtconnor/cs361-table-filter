@@ -23,6 +23,6 @@ def root():
     json_data = filter_df.to_dict()
 
     return jsonify(json_data)
-
+    
 if __name__ == '__main__': 
     app.run(debug=True)
