@@ -15,17 +15,17 @@ def check_link(request):
 
 class filter_table(Resource): 
 
-    def root(self, search, table_num, top_n): 
+    def get(self, search, table_num, top_n): 
 
-        response = requests.get('https://wikipedia-table-scraper.herokuapp.com/search/{0}/{1}').format(search, table_num)
+        response = requests.get(f'https://wikipedia-table-scraper.herokuapp.com/search/{search}/{table_num}')
         data = response.json()
 
         if top_n == None: 
 
-            json_data = pd.DataFrame.from_dict(data) 
+            json_data = pd.DataFrame(data)
 
         else: 
-            df = pd.DataFrame.from_dict(data)
+            df = pd.DataFrame(data)
             filter_df = df.head(top_n)
             json_data = filter_df.to_dict()
 
